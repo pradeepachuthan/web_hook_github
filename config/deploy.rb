@@ -1,7 +1,7 @@
 
 
 set :application, "demo"
-set :repository,  "https://github.com/pradeepachuthan/web_hook_dummy.git"
+set :repository,  "https://github.com/pradeepachuthan/web_hook_github.git"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -30,7 +30,6 @@ set :ssh_options, {
 namespace :deploy do
   task :restart do
   	p "Executing restarting"
-  	run "cd #{deploy_to}/current/ && bundle install"
     run "if [ -f #{unicorn_pid} ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn -c #{unicorn_conf}  -D; fi"
   end
   task :start do
